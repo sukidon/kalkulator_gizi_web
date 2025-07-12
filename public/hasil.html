@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hasil Kalkulasi GIZIKIDDIE</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script defer src="js/script_hasil.js"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="max-w-3xl mx-auto p-4">
+    <!-- Tombol Navigasi -->
+    <div class="flex justify-between mb-4">
+      <button onclick="window.history.back()" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition">
+        ← Kembali
+      </button>
+      <div class="space-x-2">
+        <button onclick="window.print()" class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
+          🖨 Cetak
+        </button>
+        <button onclick="shareHasil()" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
+          📤 Bagikan
+        </button>
+      </div>
+    </div>
+
+    <!-- Biodata Anak -->
+    <div class="bg-white p-4 rounded shadow mb-6">
+      <h2 class="text-lg font-semibold mb-2">Biodata Anak</h2>
+      <div id="biodata" class="text-sm space-y-1"></div>
+    </div>
+
+    <!-- Hasil Kalkulasi Gizi -->
+    <div id="hasil" class="space-y-6"></div>
+  </div>
+
+  <script>
+    function shareHasil() {
+      const text = `Cek hasil pemeriksaan gizi anak Anda melalui aplikasi GIZIKIDDIE!`;
+      const url = window.location.href;
+      const fullText = `${text} \n\n${url}`;
+      if (navigator.share) {
+        navigator.share({ title: "Hasil GIZIKIDDIE", text, url })
+          .catch(err => console.log("Share dibatalkan", err));
+      } else {
+        window.open(`https://wa.me/?text=${encodeURIComponent(fullText)}`, "_blank");
+      }
+    }
+  </script>
+</body>
+</html>
